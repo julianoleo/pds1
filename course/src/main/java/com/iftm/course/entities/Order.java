@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iftm.course.entities.enums.OrderStatus;
 
 @Entity
@@ -48,10 +49,6 @@ public class Order implements Serializable {
 		this.client = client;
 		setOrderStatus(orderStatus);
 	}
-	
-	public Set<OrderItem> getItems(){
-		return items;
-	}
 
 	public Long getId() {
 		return id;
@@ -68,14 +65,6 @@ public class Order implements Serializable {
 	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
-
-	public User getClient() {
-		return client;
-	}
-
-	public void setClient(User client) {
-		this.client = client;
-	}
 	
 	public OrderStatus getOrderStatus() {
 		return OrderStatus.valueOf(orderStatus);
@@ -85,6 +74,18 @@ public class Order implements Serializable {
 		if (orderStatus != null) {
 			this.orderStatus = orderStatus.getCode();
 		}
+	}
+	
+	public User getClient() {
+		return client;
+	}
+	
+	public void setClient(User client) {
+		this.client = client;
+	}
+	
+	public Set<OrderItem> getItems(){
+		return items;
 	}
 
 	@Override
